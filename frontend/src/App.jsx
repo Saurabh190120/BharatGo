@@ -1,14 +1,15 @@
+import AppRoutes from "./routes/AppRoutes";
+import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/Footer";
 
-function App() {
-
+export default function App() {
   return (
-    <>
-     <h1 class="text-3xl font-bold">
-    Hello world!
-  </h1>
-
-    </>
-  )
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-grow">
+        <AppRoutes />
+      </main>
+      <Footer />
+    </div>
+  );
 }
-
-export default App
