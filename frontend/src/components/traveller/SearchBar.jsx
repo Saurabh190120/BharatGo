@@ -1,22 +1,13 @@
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-4 flex flex-wrap gap-3 justify-center">
-      <input
-        type="text"
-        placeholder="Where do you want to go"
-        className="border px-4 py-2 rounded w-52"
-      />
-      <input type="date" className="border px-4 py-2 rounded" />
-      <input type="date" className="border px-4 py-2 rounded" />
-      <input
-        type="number"
-        min="1"
-        placeholder="1"
-        className="border px-4 py-2 rounded w-20"
-      />
-      <button className="bg-black text-white px-6 py-2 rounded">
-        Search
-      </button>
-    </div>
+    <form
+      onSubmit={onSearch}
+      className="bg-white shadow p-4 rounded flex gap-2"
+    >
+      <input className="border p-2 rounded w-48" placeholder="Destination" />
+      <input type="date" className="border p-2 rounded" />
+      <input type="date" className="border p-2 rounded" />
+      <button className="bg-black text-white px-6 rounded">Search</button>
+    </form>
   );
 }
