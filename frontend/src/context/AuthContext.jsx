@@ -1,11 +1,12 @@
+// src/context/AuthContext.jsx
 import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const login = (userData) => setUser(userData);
+  const login = (data) => setUser(data);
   const logout = () => setUser(null);
 
   return (
@@ -15,4 +16,10 @@ export function AuthProvider({ children }) {
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used inside AuthProvider");
+  }
+  return context;
+}
