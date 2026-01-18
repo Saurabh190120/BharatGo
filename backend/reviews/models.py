@@ -1,5 +1,6 @@
 from django.db import models
-
+from users.models import User
+from listings.models import Listing
 # Create your models here.
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
