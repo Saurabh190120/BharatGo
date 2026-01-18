@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'payments',
     'reviews',
     'listings',
+    'bookings',
     # 'messages'
     
     ]
