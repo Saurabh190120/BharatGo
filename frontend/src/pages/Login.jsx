@@ -42,7 +42,7 @@ const Login = () => {
     );
 
     if (isUser) {
-      localStorage.setItem("login", JSON.stringify(isUser));
+      sessionStorage.setItem("login", JSON.stringify(isUser));
       sendOtp();
       alert("OTP sent to your email");
       navigate("/otpverify");
