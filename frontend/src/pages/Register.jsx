@@ -80,7 +80,7 @@ const Register = () => {
         />
 
         <input
-          type="number"
+          type="text"
           name="mobile"
           placeholder="Mobile Number"
           onChange={handleChange}
