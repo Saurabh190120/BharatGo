@@ -5,7 +5,17 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     mobile = models.CharField(max_length=15)
     password = models.CharField(max_length=255)
+    is_verified = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.email
+
+class EmailOTP(models.Model):
+    email = models.EmailField()
+    otp = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
