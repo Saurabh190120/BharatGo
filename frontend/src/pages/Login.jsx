@@ -31,7 +31,7 @@ const Login = () => {
       localStorage.setItem("access", res.data.access);
       localStorage.setItem("refresh", res.data.refresh);
 
-      navigate("/my-bookings");
+      navigate("/");
     } catch (err) {
       setError("Invalid email or password");
     } finally {
