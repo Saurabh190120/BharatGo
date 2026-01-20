@@ -1,65 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const [users, setUsers] = useState([]);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/users/")
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching users", err);
-      });
-  }, []);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const sendOtp = () => {
-    axios.post("http://127.0.0.1:8000/sendotp/", {
-      email: loginData.email,
-    });
-  };
-
-  const handleLogin = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
 
-    const isUser = users.find(
-      (u) =>
-        u.email === loginData.email &&
-        u.password === loginData.password
-    );
+    try {
+      const res = await axios.post(
+        "http://127.0.0.1:8000/api/login/",
+        formData
+      );
 
-    if (isUser) {
-      sessionStorage.setItem("login", JSON.stringify(isUser));
-      sendOtp();
-      alert("OTP sent to your email");
-      navigate("/otpverify");
-    } else {
-      alert("Invalid email or password");
+      localStorage.setItem("access", res.data.access);
+      localStorage.setItem("refresh", res.data.refresh);
+
+      navigate("/my-bookings");
+    } catch (err) {
+      setError("Invalid email or password");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <form
-        onSubmit={handleLogin}
-        className="w-full max-w-md bg-white p-8 rounded-xl shadow-md"
+        onSubmit={handleSubmit}
+        className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg"
       >
-        <h2 className="text-2xl font-semibold text-center mb-6">
+        <h2 className="text-2xl font-bold text-center mb-6">
           Login
         </h2>
+
+        {error && (
+          <p className="mb-4 text-sm text-red-600 text-center">
+            {error}
+          </p>
+        )}
 
         <input
           type="email"
@@ -67,7 +61,7 @@ const Login = () => {
           placeholder="Email Address"
           onChange={handleChange}
           required
-          className="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full mb-4 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
         />
 
         <input
@@ -76,20 +70,20 @@ const Login = () => {
           placeholder="Password"
           onChange={handleChange}
           required
-          className="w-full mb-6 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full mb-6 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
         />
 
         <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition"
+          disabled={loading}
+          className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
 
         <p className="text-sm text-center mt-4">
-          Don&apos;t have an account?{" "}
+          Don’t have an account?{" "}
           <Link to="/register" className="text-blue-600 hover:underline">
-            Sign Up
+            Register
           </Link>
         </p>
       </form>
