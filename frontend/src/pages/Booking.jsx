@@ -4,7 +4,6 @@ const Booking = () => {
   return (
    <>
     <div>Booking</div>
-
     <h1> this is boooking page</h1>
    </>
     
