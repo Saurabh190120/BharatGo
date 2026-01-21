@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import User
-
+from .utils import send_otp
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -14,8 +14,15 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
-        return super().create(validated_data)
+        user = User.objects.create(**validated_data)
+        send_otp(user.email)
+        return user
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
+
+
+class OTPVerifySerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    otp = serializers.CharField()

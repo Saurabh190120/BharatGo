@@ -8,7 +8,7 @@ import Booking from "../pages/Booking";
 import MyBookings from "../pages/MyBookings";
 import ProviderDashboard from "../pages/ProviderDashboard";
 import AdminDashboard from "../pages/AdminDashboard";
-
+import VerifyOTP from "../pages/VerifyOTP";
 export default function AppRoutes() {
   return (
     <Routes>
@@ -21,6 +21,7 @@ export default function AppRoutes() {
       <Route path="/my-bookings" element={<MyBookings />} />
       <Route path="/provider" element={<ProviderDashboard />} />
       <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/verify-otp" element={<VerifyOTP />} />
     </Routes>
   );
 }

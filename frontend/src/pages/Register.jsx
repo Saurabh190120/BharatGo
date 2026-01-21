@@ -26,7 +26,7 @@ const Register = () => {
 
     try {
       await axios.post("http://127.0.0.1:8000/api/register/", formData);
-      navigate("/login");
+      navigate("/verify-otp", { state: { email: formData.email } });
     } catch (err) {
       if (err.response?.data) {
         setError(Object.values(err.response.data)[0]);
