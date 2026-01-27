@@ -1,17 +1,33 @@
-import SearchBar from "../SearchBar";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Home() {
+const Home = () => {
+  const [location, setLocation] = useState("");
+  const navigate = useNavigate();
+
+  const search = () => {
+    navigate(`/traveller/search?location=${location}`);
+  };
+
   return (
-    <section className="text-center py-20">
-      <h1 className="text-4xl font-bold mb-3">
-        Discover Your Next Adventure
-      </h1>
-      <p className="text-gray-600 mb-8">
-        Flights, hotels, buses and packages
-      </p>
-      <div className="flex justify-center">
-        <SearchBar />
-      </div>
-    </section>
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-4">Search Travel Listings</h1>
+
+      <input
+        type="text"
+        placeholder="Enter location"
+        className="border p-2 rounded w-64 mr-2"
+        onChange={(e) => setLocation(e.target.value)}
+      />
+
+      <button
+        onClick={search}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Search
+      </button>
+    </div>
   );
-}
+};
+
+export default Home;
