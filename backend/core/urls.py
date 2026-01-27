@@ -11,5 +11,6 @@ urlpatterns = [
     path('reviews', include('reviews.urls')),
     path('listings', include('listings.urls')),
     # path('messages', include('messages.urls')),
+    path("api/bookings/", include("bookings.urls")),
 ]
 
