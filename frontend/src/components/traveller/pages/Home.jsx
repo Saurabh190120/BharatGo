@@ -1,4 +1,4 @@
-import SearchBar from "../components/traveller/SearchBar";
+import SearchBar from "../SearchBar";
 
 export default function Home() {
   return (
