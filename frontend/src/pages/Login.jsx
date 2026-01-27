@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Cookies from "js-cookie";
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -28,8 +29,18 @@ const Login = () => {
         formData
       );
 
-      localStorage.setItem("access", res.data.access);
-      localStorage.setItem("refresh", res.data.refresh);
+      // ✅ Store tokens in cookies
+      Cookies.set("access_token", res.data.access, {
+        expires: 1,
+        secure: true,
+        sameSite: "strict",
+      });
+
+      Cookies.set("refresh_token", res.data.refresh, {
+        expires: 7,
+        secure: true,
+        sameSite: "strict",
+      });
 
       navigate("/");
     } catch (err) {
