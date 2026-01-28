@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '../components/traveller/pages/Home'
 import Login from '../auth/Login'
 import Register from '../auth/Register'
+import Dashboard from '../provider/pages/Dashboard.jsx';
 export default function AppRoutes() {
   return (
     <Routes>
@@ -16,6 +17,7 @@ export default function AppRoutes() {
       <Route path="/provider" element={<ProviderDashboard />} />
       <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/verify-otp" element={<VerifyOTP />} /> */}
+      <Route path="/provider" element={<Dashboard />} />
     </Routes>
   );
 }
