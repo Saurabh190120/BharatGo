@@ -5,3 +5,9 @@ export const getProviderDashboard = (providerId) => {
     `http://127.0.0.1:8000/api/provider/dashboard/${providerId}/`
   );
 };
+export const createListing = (data) => {
+  return axios.post(
+    "http://127.0.0.1:8000/api/listings/create/",
+    data
+  );
+};

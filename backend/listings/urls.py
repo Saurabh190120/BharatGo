@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import listings 
+from .views import create_listing
+
 urlpatterns = [
-    path('', listings),
+    path("create/", create_listing),
 ]
