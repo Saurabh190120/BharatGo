@@ -42,11 +42,11 @@ INSTALLED_APPS = [
     'users',
     'providers',
     'admins',
-    'payments',
-    'reviews',
+    
+    
     'listings',
     'bookings',
-    # 'messages'
+ 
     
     ]
 
