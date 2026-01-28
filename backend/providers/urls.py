@@ -1,5 +1,6 @@
 from django.urls import path
-from . import views 
+from .views import provider_dashboard
+
 urlpatterns = [
-    path('', views.provider_list, name='provider-list'),
+    path("dashboard/<int:provider_id>/", provider_dashboard),
 ]
