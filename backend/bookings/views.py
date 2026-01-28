@@ -16,3 +16,4 @@
 #     bookings = Booking.objects.filter(user=request.user)
 #     serializer = BookingSerializer(bookings, many=True)
 #     return Response(serializer.data)
+
