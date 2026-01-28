@@ -42,9 +42,7 @@ INSTALLED_APPS = [
     'users',
     'providers',
     'admins',
-    
-    
-    # 'listings',
+    'listings',
     # 'bookings',
  
     
