@@ -7,7 +7,7 @@ urlpatterns = [
     path('api/', include('users.urls')),
     path('providers', include('providers.urls')),
     path('admins', include('admins.urls')),   
-    path('listings', include('listings.urls')),
-    path("api/bookings/", include("bookings.urls")),
+    # path('listings', include('listings.urls')),
+    # path("api/bookings/", include("bookings.urls")),
 ]
 

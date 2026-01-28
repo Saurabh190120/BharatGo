@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'admins',
     
     
-    'listings',
-    'bookings',
+    # 'listings',
+    # 'bookings',
  
     
     ]
