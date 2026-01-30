@@ -5,6 +5,7 @@ import Login from '../auth/Login'
 import Register from '../auth/Register'
 import Dashboard from '../provider/pages/Dashboard.jsx';
 import AddListing from '../provider/pages/AddListing.jsx';
+import AddBusRoute from '../provider/pages/AddBusRoute.jsx';
 export default function AppRoutes() {
   return (
     <Routes>
@@ -20,6 +21,8 @@ export default function AppRoutes() {
       <Route path="/verify-otp" element={<VerifyOTP />} /> */}
       <Route path="/provider/dashboard" element={<Dashboard />} />
       <Route path="/provider/add-listing" element={<AddListing />} />
+      <Route path="/provider/add-route" element={<AddBusRoute />} />
+
     </Routes>
   );
 }
