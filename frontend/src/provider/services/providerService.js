@@ -12,7 +12,6 @@ export const createListing = (data) => {
   );
 };
 
-import axios from "axios";
 
 export const createBusRoute = (data) => {
   return axios.post(
