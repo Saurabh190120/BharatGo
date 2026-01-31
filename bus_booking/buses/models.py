@@ -17,3 +17,17 @@ class Bus(models.Model):
 
     def __str__(self):
         return self.bus_name
+
+class Schedule(models.Model):
+    bus = models.ForeignKey(Bus, on_delete=models.CASCADE)
+    route = models.ForeignKey(Route, on_delete=models.CASCADE)
+    date = models.DateField()
+    departure_time = models.TimeField()
+    arrival_time = models.TimeField()
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+
+
+class Seat(models.Model):
+    schedule = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    seat_number = models.CharField(max_length=5)
+    is_booked = models.BooleanField(default=False)
