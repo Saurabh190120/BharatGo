@@ -27,7 +27,7 @@ def seat_availability(request, schedule_id):
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from accounts.permissions import IsProvider
-from .serializers import BusSerializer, RouteSerializer
+from .serializers import BusSerializer, RouteSerializer, ScheduleSerializer
 from .models import Bus
 
 @api_view(['POST'])
@@ -46,4 +46,23 @@ def add_route(request):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
+    return Response(serializer.errors, status=400)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, IsProvider])
+def add_schedule(request):
+    serializer = ScheduleSerializer(data=request.data)
+    if serializer.is_valid():
+        schedule = serializer.save()
+
+        # Auto-create seats
+        total_seats = schedule.bus.total_seats
+        for i in range(1, total_seats + 1):
+            Seat.objects.create(
+                schedule=schedule,
+                seat_number=f"S{i}"
+            )
+
+        return Response({"message": "Schedule & seats created"})
     return Response(serializer.errors, status=400)
