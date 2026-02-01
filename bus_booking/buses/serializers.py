@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Bus, Schedule
+from .models import Bus, Schedule, Seat,Route
 
 class BusSearchSerializer(serializers.ModelSerializer):
     bus_name = serializers.CharField(source='bus.bus_name')
@@ -11,3 +11,9 @@ class BusSearchSerializer(serializers.ModelSerializer):
             'id', 'bus_name', 'bus_type',
             'departure_time', 'arrival_time', 'price'
         ]
+
+class BusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bus
+        fields = '__all__'
+        read_only_fields = ['provider']
