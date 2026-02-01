@@ -21,3 +21,20 @@ def seat_availability(request, schedule_id):
     seats = Seat.objects.filter(schedule_id=schedule_id)
     data = [{"seat": s.seat_number, "is_booked": s.is_booked} for s in seats]
     return Response(data)
+
+
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from accounts.permissions import IsProvider
+from .serializers import BusSerializer
+from .models import Bus
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, IsProvider])
+def add_bus(request):
+    serializer = BusSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(provider=request.user.provider)
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
