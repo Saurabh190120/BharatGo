@@ -1,5 +1,7 @@
+
 export default function AddSchedule() {
   return (
+    
     <div className="flex">
       <div className="p-8 flex-1">
         <h2 className="text-xl font-semibold">Add Schedule</h2>
