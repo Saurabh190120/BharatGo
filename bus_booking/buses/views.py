@@ -27,7 +27,7 @@ def seat_availability(request, schedule_id):
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from accounts.permissions import IsProvider
-from .serializers import BusSerializer
+from .serializers import BusSerializer, RouteSerializer
 from .models import Bus
 
 @api_view(['POST'])
@@ -36,5 +36,14 @@ def add_bus(request):
     serializer = BusSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save(provider=request.user.provider)
+        return Response(serializer.data)
+    return Response(serializer.errors, status=400)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated, IsProvider])
+def add_route(request):
+    serializer = RouteSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=400)
