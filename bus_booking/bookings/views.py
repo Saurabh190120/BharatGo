@@ -30,3 +30,25 @@ def create_booking(request):
     )
 
     return Response({"message": "Booking successful", "booking_id": booking.id})
+
+from rest_framework.permissions import IsAuthenticated
+from accounts.permissions import IsProvider
+from buses.models import Schedule
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsProvider])
+def provider_bookings(request):
+    schedules = Schedule.objects.filter(bus__provider=request.user.provider)
+    bookings = Booking.objects.filter(schedule__in=schedules)
+
+    data = []
+    for b in bookings:
+        data.append({
+            "user": b.user.username,
+            "bus": b.schedule.bus.bus_name,
+            "seats": b.seat_numbers,
+            "amount": b.total_amount,
+            "date": b.booked_at
+        })
+
+    return Response(data)
