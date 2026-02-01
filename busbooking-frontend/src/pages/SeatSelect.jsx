@@ -24,7 +24,7 @@ export default function SeatSelect() {
     }).then(() => alert("Booking Successful"));
   };
 
-  return (
+  return (<>
     <div className="p-6">
       <div className="grid grid-cols-4 gap-3">
         {seats.map(s => (
@@ -49,5 +49,13 @@ export default function SeatSelect() {
         Confirm Booking
       </button>
     </div>
+    <div className="mt-6 p-4 bg-white shadow rounded">
+  <h3 className="font-semibold">Booking Summary</h3>
+  <p>Seats: {selected.join(", ")}</p>
+  <p>Total: ₹{selected.length * 500}</p>
+</div>
+
+
+    </>
   );
 }
