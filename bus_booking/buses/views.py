@@ -66,3 +66,10 @@ def add_schedule(request):
 
         return Response({"message": "Schedule & seats created"})
     return Response(serializer.errors, status=400)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated, IsProvider])
+def provider_buses(request):
+    buses = Bus.objects.filter(provider=request.user.provider)
+    serializer = BusSerializer(buses, many=True)
+    return Response(serializer.data)
