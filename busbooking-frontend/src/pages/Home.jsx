@@ -12,18 +12,9 @@ export default function Home() {
   };
 
   return (<>
-    <div className="p-10">
-      <div className="bg-white shadow p-6 rounded">
-        <input placeholder="From" onChange={e => setSource(e.target.value)} />
-        <input placeholder="To" onChange={e => setDestination(e.target.value)} />
-        <input type="date" onChange={e => setDate(e.target.value)} />
-        <button onClick={search} className="bg-red-500 text-white px-4 py-2">
-          Search Buses
-        </button>
-      </div>
-    </div>
+    
     <div className="bg-gray-100 h-[80vh] flex justify-center items-center">
-  <div className="bg-white p-8 rounded-xl shadow-lg w-[900px]">
+  <div className="bg-white p-8 rounded-xl shadow-lg w-225">
     <h2 className="text-2xl font-semibold mb-6">
       Book Bus Tickets Online
     </h2>
